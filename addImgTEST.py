@@ -1,3 +1,5 @@
+import os
+dir_list = os.listdir()
 
 imgSrcToSearch = "<img src="
 onlyMedia = "/media"
@@ -8,9 +10,8 @@ imgSrc = ""
 dataImg = ""
 extension =""
 
-word_list = ['49.md', "pruebaEntrada.md"]
-for x in word_list:
-    with open ('{x}'.format(x=x), 'r+', encoding='utf8') as myfile,  open ('#{x}'.format(x=x), 'w') as secondFile: 
+for x in dir_list:
+    with open ('{x}'.format(x=x), 'r+', encoding='utf8') as myfile,  open ('#{x}'.format(x=x), 'w',encoding='utf8') as secondFile: 
         for line in myfile:
             
             if line.find(imgSrcToSearch) != -1:
@@ -32,7 +33,7 @@ for x in word_list:
 
                         print(f"image: {dataImg}")
                         print(f"extension: {extension}")
-                        
+
                         if dataImg[-1] == "g":
                             secondFile.write("![" + dataImg.rstrip('/n') + "](./images/media/" + dataImg.rstrip('/n') + ")")
                         else:
@@ -42,7 +43,9 @@ for x in word_list:
                             elif extension[:1] == "j":
                                 dataImg = img[k:k+10] 
                                 secondFile.write("![" + dataImg.rstrip('/n') + "g](./images/media/" + dataImg.rstrip('/n') + "g)")
-                            
+                            elif extension[:1] == "g":
+                                dataImg = img[k:k+9] 
+                                secondFile.write("![" + dataImg.rstrip('/n') + "if](./images/media/" + dataImg.rstrip('/n') + "if)")
             else:
                 secondFile.write(line.rstrip('/n'))
             
